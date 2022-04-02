@@ -9,6 +9,10 @@ This application is a standalone _task based_ micro service providing REST HTTP 
 * Strong error handling
 * Using PM2 advanced production process manager
 
+## Challenge tackling
+This app is meant to capture some specific Tribe webhooks and dispatch an event to a message broker.
+We are only interested in registered users' webhook. Then we will fire an event to the broker (that is RabbitMq in this case) and some consumers could react to these events and perform the desired action. For instance, we can send a bouquet of flowers to their address! Implementing the consumers logic is out of this project's scope.  
+
 ## Installation guide
 Follow these steps to simply run the project.
 
