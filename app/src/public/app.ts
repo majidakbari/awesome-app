@@ -1,4 +1,3 @@
-import "reflect-metadata"
 import dotenv from "dotenv";
 import helmet from "helmet";
 import express from "express";
@@ -6,7 +5,7 @@ import appRouter from "../routes/index";
 import corsHandler from "../middlewares/corsHandler";
 import errorHandler from "../middlewares/errorHandler";
 import routeHandler from "../middlewares/routeHandler";
-import acceptableHandler from "../middlewares/acceptableHandler";
+import acceptableHandler from "../middlewares/appectableRequestHandler";
 
 dotenv.config();
 
@@ -18,4 +17,4 @@ app.use(acceptableHandler);
 app.use(appRouter);
 app.use(routeHandler);
 app.use(errorHandler);
-app.listen(process.env.NODE_PORT)
+app.listen(process.env.NODE_PORT || 3000)

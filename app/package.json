@@ -4,6 +4,7 @@
   "description": "Simple stand-alone service for adding a new functionality in tribe environment",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon src/public/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -38,6 +39,7 @@
     "@typescript-eslint/parser": "^5.17.0",
     "eslint": "^8.12.0",
     "eslint-plugin-node": "^11.1.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0"
   }
 }
