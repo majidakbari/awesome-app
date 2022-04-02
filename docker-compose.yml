@@ -12,5 +12,37 @@ services:
     ports:
       - "${APP_PORT}:${NODE_PORT}"
     restart: always
+    depends_on:
+      - broker
+    networks:
+      - app-network
     env_file:
       - .env
+
+  ## --------------------------------------------------
+  ## | Broker - Rabbitmq
+  ## --------------------------------------------------
+  broker:
+    image: bitnami/rabbitmq
+    container_name: broker
+    volumes:
+      - './.docker/broker/data:/bitnami'
+    restart: always
+    networks:
+      - app-network
+    environment:
+      - RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
+      - RABBITMQ_NODE_TYPE=queue-disc
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:15672" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+# Networks
+networks:
+  app-network:
+    driver: bridge
