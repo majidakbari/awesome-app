@@ -1,7 +1,8 @@
+// @ts-ignore
 import request from 'supertest'
 import {Express} from 'express-serve-static-core'
 
-import createServer from '../../../src/utils/server'
+import createServer from '../../../utils/server'
 
 let server: Express
 

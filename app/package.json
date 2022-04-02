@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon src/public/app.ts",
-    "test": "jest"
+    "test": "jest",
+    "start": "npx pm2 start pm2.yaml --no-daemon"
   },
   "repository": {
     "type": "git",

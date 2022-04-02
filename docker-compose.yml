@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  ## --------------------------------------------------
+  ## | Web Server and application pm2 (node)
+  ## --------------------------------------------------
+  backend:
+    container_name: backend
+    build:
+      context: ./
+      dockerfile: .docker/backend/Dockerfile
+    ports:
+      - "${APP_PORT}:${NODE_PORT}"
+    restart: always
+    env_file:
+      - .env
