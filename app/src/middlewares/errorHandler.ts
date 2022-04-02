@@ -1,5 +1,5 @@
 import AbstractError from "../errors/abstractError";
-import ErrorInterface from "../interfaces/errorInterface";
+import ErrorInterface from "../interfaces/error";
 import {Request, Response, NextFunction, ErrorRequestHandler} from "express";
 
 const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {

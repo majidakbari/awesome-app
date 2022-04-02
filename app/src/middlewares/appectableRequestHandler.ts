@@ -1,7 +1,7 @@
 import {RequestHandler} from "express";
 import NotAcceptableError from "../errors/notAcceptedError";
 
-const acceptableHandler: RequestHandler = (req, res, next) => {
+const acceptableRequestHandler: RequestHandler = (req, res, next) => {
     const acceptHeader = req.header("accept");
     if (acceptHeader != undefined) {
         if (["*/*", "application/json"].indexOf(acceptHeader.toString()) < 0) {
@@ -11,4 +11,4 @@ const acceptableHandler: RequestHandler = (req, res, next) => {
     next();
 };
 
-export default acceptableHandler;
+export default acceptableRequestHandler;

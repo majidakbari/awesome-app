@@ -5,14 +5,14 @@ import appRouter from "../routes/index";
 import corsHandler from "../middlewares/corsHandler";
 import errorHandler from "../middlewares/errorHandler";
 import routeHandler from "../middlewares/routeHandler";
-import acceptableHandler from "../middlewares/appectableRequestHandler";
+import acceptableRequestHandler from "../middlewares/appectableRequestHandler";
 
 const createServer = () => {
     dotenv.config();
     const app = express();
     app.use(helmet());
     app.use(corsHandler);
-    app.use(acceptableHandler);
+    app.use(acceptableRequestHandler);
     app.use(appRouter);
     app.use(routeHandler);
     app.use(errorHandler);
