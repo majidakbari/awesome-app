@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/public/app.ts",
     "test": "jest --config ./jest.config.ts",
-    "start": "npx pm2 start pm2.yaml --no-daemon"
+    "start": "npx pm2 start pm2.yaml --no-daemon",
+    "lint": "./node_modules/.bin/eslint src"
   },
   "repository": {
     "type": "git",
