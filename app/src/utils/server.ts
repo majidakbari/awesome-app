@@ -6,10 +6,12 @@ import corsHandler from "../middlewares/corsHandler";
 import errorHandler from "../middlewares/errorHandler";
 import routeHandler from "../middlewares/routeHandler";
 import acceptableRequestHandler from "../middlewares/appectableRequestHandler";
+import bodyParser from "body-parser";
 
 const createServer = () => {
     dotenv.config();
     const app = express();
+    app.use(bodyParser.json())
     app.use(helmet());
     app.use(corsHandler);
     app.use(acceptableRequestHandler);

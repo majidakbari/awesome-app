@@ -3,11 +3,13 @@ import {RequestHandler} from "express";
 
 const webhookController: RequestHandler = async (req, res) => {
     await dispatchEvent({
-        eventType: "user_created",
-        eventBody: "Hello it's me"
-    }, 'default-queue').catch(err => {throw err});
+        eventType: req.body.data.type,
+        eventBody: JSON.stringify(req.body.data)
+    });
     return res.send({
-        message: "Hello world"
+        type: req.body.type,
+        status: "SUCCEEDED",
+        data: req.body.data
     })
 };
 

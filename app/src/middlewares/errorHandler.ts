@@ -13,6 +13,9 @@ const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Respon
             error: "Client Error",
             message: err.message
         };
+        if (err.details.length > 0) {
+            error.details = err.details;
+        }
     } else if (err instanceof AbstractServerError) {
         statusCode = err.statusCode;
         error = {
