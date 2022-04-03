@@ -44,7 +44,7 @@ describe('show proper error messages in case of having invalid request.', () => 
 
     it('should return 405 when request method is not correct.', done => {
         request(server)
-            .post(`/api/hello`)
+            .post(`/api/webhook`)
             .expect('Content-Type', /json/)
             .expect(405)
             .end((err, res) => {
