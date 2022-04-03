@@ -1,6 +1,6 @@
-import AbstractError from "./abstractError";
+import AbstractClientError from "./abstractClientError";
 
-class NotAcceptedError extends AbstractError{
+class NotAcceptedError extends AbstractClientError{
     constructor() {
         super(406, "This application only returns json responses.");
     }

@@ -1,6 +1,6 @@
-import AbstractError from "./abstractError";
+import AbstractClientError from "./abstractClientError";
 
-class RouteNotFoundError extends AbstractError{
+class RouteNotFoundError extends AbstractClientError{
     constructor() {
         super(404, "Route not found.");
     }

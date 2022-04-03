@@ -1,20 +1,32 @@
-import AbstractError from "../errors/abstractError";
+import AbstractClientError from "../errors/abstractClientError";
 import ErrorInterface from "../interfaces/error";
 import {Request, Response, NextFunction, ErrorRequestHandler} from "express";
+import AbstractServerError from "../errors/abstractServerError";
 
 const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
-    if (err instanceof AbstractError) {
-        const error: ErrorInterface = {
+    let error: ErrorInterface;
+    let statusCode: number;
+
+    if (err instanceof AbstractClientError) {
+        statusCode = err.statusCode;
+        error = {
             error: "Client Error",
             message: err.message
         };
-        res.status(err.statusCode).json(error);
-    } else {
-        res.status(500).json({
+    } else if (err instanceof AbstractServerError) {
+        statusCode = err.statusCode;
+        error = {
             error: "Server Error",
-            message: "Something went wrong."
-        });
+            message: err.message
+        };
+    } else {
+       statusCode = 500;
+       error = {
+           error: "Server Error",
+           message: "Something went wrong."
+       };
     }
+    res.status(statusCode).json(error);
     next();
 };
 
