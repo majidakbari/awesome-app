@@ -30,7 +30,7 @@ const close = async (connection: Connection) => {
 };
 
 
-const dispatchEvent = async (event: Event, queue: string = 'default'): Promise<boolean> => {
+const dispatchEvent = async (event: Event, queue = 'default'): Promise<boolean> => {
     const connection = await connect();
     if (!connection) {
         return false;
