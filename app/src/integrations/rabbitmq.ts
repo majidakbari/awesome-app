@@ -2,7 +2,7 @@ import amqp, {Channel, Connection} from "amqplib";
 import Event from "../interfaces/event";
 import BrokerConnectionError from "../errors/BrokerConnectionError";
 
-const connect = async (): Promise<Connection | null> => {
+const connect = async (): Promise<Connection> => {
     try {
         return await amqp.connect(
             `amqp://${process.env.RABBITMQ_USERNAME}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}`
@@ -12,13 +12,14 @@ const connect = async (): Promise<Connection | null> => {
     }
 };
 
-const createChannel = async (connection: Connection, queueName: string): Promise<Channel | null> => {
-    const channel = await connection.createChannel();
-    if (!channel) {
+const createChannel = async (connection: Connection, queueName: string): Promise<Channel> => {
+    try {
+        const channel = await connection.createChannel();
+        await channel.assertQueue(queueName);
+        return channel;
+    } catch (err) {
         throw new BrokerConnectionError();
     }
-    await channel.assertQueue(queueName);
-    return channel;
 };
 
 const send = (ch: Channel, queueName: string, msg: string) => {
@@ -30,18 +31,11 @@ const close = async (connection: Connection) => {
 };
 
 
-const dispatchEvent = async (event: Event, queue = 'default'): Promise<boolean> => {
+const dispatchEvent = async (event: Event, queue = 'default') => {
     const connection = await connect();
-    if (!connection) {
-        return false;
-    }
     const channel = await createChannel(connection, queue);
-    if (!channel) {
-        return false;
-    }
     send(channel, queue, event.eventBody);
     await close(connection);
-    return true;
 };
 
 export default dispatchEvent;
