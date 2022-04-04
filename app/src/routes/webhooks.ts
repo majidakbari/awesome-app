@@ -8,7 +8,7 @@ import webhookValidationRules from "../validations/webhookValidationRules";
 const router = Router();
 
 router.route('/webhook')
-    .get(webhookValidationRules, validationErrorHandler,asyncHandler(webhookController))
+    .post(webhookValidationRules, validationErrorHandler, asyncHandler(webhookController))
     .all(methodNotAllowedHandler);
 
 export default router;

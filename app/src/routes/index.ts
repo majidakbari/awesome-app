@@ -1,8 +1,8 @@
 import { Router } from "express";
-import helloRouter from "./webhooks";
+import webhooks from "./webhooks";
 
 const router = Router();
 
-router.use("/api", helloRouter);
+router.use("/api", webhooks);
 
 export default router;
