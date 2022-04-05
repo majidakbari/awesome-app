@@ -1,4 +1,4 @@
-import AbstractError from "./abstractError";
+import AbstractError from "../abstractError";
 
 abstract class AbstractServerError extends AbstractError
 {

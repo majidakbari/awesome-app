@@ -1,5 +1,5 @@
 import {RequestHandler} from "express";
-import NotAcceptableError from "../errors/notAcceptedError";
+import NotAcceptableError from "../errors/clinetError/notAcceptedError";
 
 const acceptableRequestHandler: RequestHandler = (req, res, next) => {
     const acceptHeader = req.header("accept");
