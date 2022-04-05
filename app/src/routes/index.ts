@@ -1,4 +1,4 @@
-import { Router } from "express";
+import {Router} from "express";
 import webhooks from "./webhooks";
 
 const router = Router();

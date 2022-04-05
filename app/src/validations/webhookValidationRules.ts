@@ -1,4 +1,4 @@
-import { body } from "express-validator"
+import {body} from "express-validator"
 
 const webhookValidationRules = [
     body('networkId').exists().isString(),

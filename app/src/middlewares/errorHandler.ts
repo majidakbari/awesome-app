@@ -23,11 +23,11 @@ const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Respon
             message: err.getMessage()
         };
     } else {
-       statusCode = 500;
-       error = {
-           error: "Server Error",
-           message: "Something went wrong."
-       };
+        statusCode = 500;
+        error = {
+            error: "Server Error",
+            message: "Something went wrong."
+        };
     }
     res.status(statusCode).json(error);
     next();
