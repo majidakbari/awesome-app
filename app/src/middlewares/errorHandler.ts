@@ -1,7 +1,7 @@
-import AbstractClientError from "../errors/clinetError/abstractClientError";
+import AbstractClientError from "../errors/clinetErrors/abstractClientError";
 import ErrorInterface from "../interfaces/error";
 import {Request, Response, NextFunction, ErrorRequestHandler} from "express";
-import AbstractServerError from "../errors/serverError/abstractServerError";
+import AbstractServerError from "../errors/serverErrors/abstractServerError";
 
 const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
     let error: ErrorInterface;

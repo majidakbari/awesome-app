@@ -1,4 +1,4 @@
-import MethodNotAllowedError from "../errors/clinetError/methodNotAllowedError";
+import MethodNotAllowedError from "../errors/clinetErrors/methodNotAllowedError";
 
 const methodNotAllowedHandler = () => {
     throw new MethodNotAllowedError();
