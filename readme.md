@@ -59,7 +59,7 @@ Then introduce the address in the output to your tribe console. Then easily you'
 This project includes two docker containers:
 
 `backend`
-node:latest  
+node:17.8.0  
 `broker`
 bitnami/rabbitmq
 
