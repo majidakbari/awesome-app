@@ -56,10 +56,12 @@ ngrok http http://localhost:8080
 Then introduce the address in the output to your tribe console. Then easily you'll be able to capture Tribe webhooks in your local environment.
 
 ## Technical discussions (Images/Containers)
-This project includes just one docker container based on `node` base image.
+This project includes two docker containers:
 
 `backend`
-node:latest
+node:latest  
+`broker`
+bitnami/rabbitmq
 
 ## Author
 Majid Akbari [Linkedin](https://linkedin.com/in/majid-akbari)
