@@ -47,6 +47,14 @@ docker-compose exec backend npm run test
 It will run all the tests with code coverage.
 
 
+### Local deployment tip
+The application purpose is to capture some webhooks from a remote address. In such a scenario your app needs to be hosted on a valid ip address on internet;
+For local deployment/testing goals we can easily publish our app temporarily using [ngrok](https://ngrok.com/). Install the package on your local machine and run the following command in terminal:
+```bash
+ngrok http http://localhost:8080 
+```
+Then introduce the address in the output to your tribe console. Then easily you'll be able to capture Tribe webhooks in your local environment.
+
 ## Technical discussions (Images/Containers)
 This project includes just one docker container based on `node` base image.
 
