@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:17.8.0
 LABEL maintainer="Majid Akbari <majidakbariiii@gmail.com>"
 
 RUN mkdir /node
