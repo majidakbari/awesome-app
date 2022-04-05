@@ -1,12 +1,11 @@
 // @ts-ignore
 import request from 'supertest'
 import {Express} from 'express-serve-static-core'
-
 import createServer from '../../../utils/createServer'
 
 let server: Express
 
-beforeAll(async () => {
+beforeAll(() => {
     server = createServer();
 })
 
@@ -44,7 +43,7 @@ describe('show proper error messages in case of having invalid request.', () => 
 
     it('should return 405 when request method is not correct.', done => {
         request(server)
-            .post(`/api/webhook`)
+            .get(`/api/webhook`)
             .expect('Content-Type', /json/)
             .expect(405)
             .end((err, res) => {
