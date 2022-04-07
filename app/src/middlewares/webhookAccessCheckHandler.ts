@@ -6,7 +6,7 @@ const webhookAccessCheckHandler: RequestHandler = (req, res, next) => {
     const signature = req.header('x-tribe-signature');
     const timestamp = req.header('x-tribe-request-timestamp');
 
-    if (!signature || !timestamp || verifySignature({
+    if (!signature || !timestamp || !verifySignature({
         signature: signature,
         body: JSON.stringify(req.body),
         timestamp: parseInt(timestamp)
