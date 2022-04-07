@@ -6,6 +6,7 @@ import corsHandler from "../middlewares/corsHandler";
 import errorHandler from "../middlewares/errorHandler";
 import routeHandler from "../middlewares/routeHandler";
 import bodyParser from "body-parser";
+import "reflect-metadata"
 
 const createServer = () => {
     dotenv.config();
