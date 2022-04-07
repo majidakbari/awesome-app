@@ -3,19 +3,18 @@ import accessDeniedError from "../errors/clinetErrors/accessDeniedError";
 import * as crypto from "crypto";
 
 const webhookAccessCheckHandler: RequestHandler = (req, res, next) => {
-    const signature = req.header('x-tribe-signature');
-    const timestamp = req.header('x-tribe-request-timestamp');
+    const signature = req.headers ? req.headers['x-tribe-signature'] : undefined;
+    const timestamp = req.headers ? req.headers['x-tribe-request-timestamp'] : undefined;
 
     if (!signature || !timestamp || !verifySignature({
-        signature: signature,
+        signature: signature as string,
         body: JSON.stringify(req.body),
-        timestamp: parseInt(timestamp)
+        timestamp: parseInt(timestamp as string)
     })) {
         throw new accessDeniedError();
     }
     next();
 };
-
 
 export const getSignature = (options: { body: string; timestamp: number }): string => {
     const {body, timestamp} = options;
