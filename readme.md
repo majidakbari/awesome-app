@@ -1,17 +1,22 @@
-# Tribe awesome app
+# Tribe recommendation system
 
 ## Summary
-This application is a standalone _task based_ micro service providing REST HTTP endpoints.
+This application is a standalone _task based_ microservice providing REST HTTP endpoints.
+
+## Challenge to be tackled
+People may show interest in different topics, but even if you ask them, they might not be aware of the things they like the most 
+or the subjects they're interested in. So we're about to build an app to suggest users the posts and topics that could be interesting to them.  
+Whenever a post gets created, this application will capture the corresponding webhook and remembers that the author likes this topic. 
+We store this data in a local database. For now, we distinguish topics based on the tags attached to posts, but in future it would be awesome to do some analysis on post texts to extract some keywords and tags out of them. 
+The other users who put a reply on the posts will be considered as eager to see similar posts as well. So by capturing the `reply.add` webhook we append this data to our local db as well.
+After a while, when the application learns about people interest, it will be able to notify users about the new posts that might be interesting to them (sth like Twitter recommendation system).  
+So in a nutshell the purpose is to increase user engagement factor.
 
 ## Features Overview
 * Fully isolated and dockerized application
 * Avoiding compilation error with the power of [Typescript](https://www.typescriptlang.org/)
 * Strong error handling
 * Using PM2 advanced production process manager
-
-## Challenge to be tackled
-This app is meant to capture some specific Tribe webhooks and dispatch an event to a message broker.
-We will fire an event to the broker (that is RabbitMq in this case) and some consumers could react to these events and perform the desired action. For instance, we can send a bouquet of flowers to their address! Implementing the consumers logic is out of this project's scope.  
 
 ## Installation guide
 Follow these steps to simply run the project.
