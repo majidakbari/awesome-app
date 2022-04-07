@@ -14,10 +14,27 @@ services:
     restart: always
     depends_on:
       - broker
+      - datastore
     networks:
       - app-network
     env_file:
       - .env
+
+  ## --------------------------------------------------
+  ## | Database Server (Postgres)
+  ## --------------------------------------------------
+  datastore:
+    image: postgres:alpine3.15
+    container_name: datastore
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - app-network
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
 
   ## --------------------------------------------------
   ## | Broker - Rabbitmq
