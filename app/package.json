@@ -1,5 +1,5 @@
 {
-  "name": "tribe-app",
+  "name": "recommendation-app",
   "version": "1.0.0",
   "description": "Simple stand-alone service for adding a new functionality in tribe environment",
   "main": "app.js",
@@ -17,6 +17,7 @@
     "microservice",
     "typescript",
     "tribe",
+    "recommendation",
     "express",
     "node"
   ],
