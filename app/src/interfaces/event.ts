@@ -6,7 +6,8 @@ interface Event {
         },
         object?: {
             id: string,
-            title: string
+            title: string,
+            postId?: string
         }
     };
 }

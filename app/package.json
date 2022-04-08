@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/majidakbari/awesome-app#readme",
   "dependencies": {
+    "@tribeplatform/gql-client": "^1.2.0",
     "amqplib": "^0.8.0",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",

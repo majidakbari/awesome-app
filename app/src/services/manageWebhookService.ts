@@ -10,7 +10,7 @@ const manageWebhookService = async (event: Event): Promise<void> => {
             break;
         case 'reply.added':
         case 'reaction.added':
-            replyAddedHandler(event);
+            await replyAddedHandler(event);
             break;
         case 'TEST':
             // do nothing
