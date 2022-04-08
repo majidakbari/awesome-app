@@ -34,7 +34,7 @@ const close = async (connection: Connection) => {
 const dispatchEvent = async (event: Event, queue = 'default') => {
     const connection = await connect();
     const channel = await createChannel(connection, queue);
-    send(channel, queue, event.eventBody);
+    send(channel, queue, JSON.stringify(event.eventBody));
     await close(connection);
 };
 

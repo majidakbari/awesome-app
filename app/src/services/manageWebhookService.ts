@@ -1,16 +1,16 @@
 import Event from "../interfaces/event";
 import notSupportedEventError from "../errors/clinetErrors/notSupportedEventError";
-import tagAddedHandler from "./tagAddedHandler";
-import replyAddedHandler from "./replyAddedHandler";
+import tagAddedHandlerService from "./tagAddedHandlerService";
+import replyAddedHandlerService from "./replyAddedHandlerService";
 
 const manageWebhookService = async (event: Event): Promise<void> => {
     switch (event.eventType) {
         case 'tag.added':
-            await tagAddedHandler(event);
+            await tagAddedHandlerService(event);
             break;
         case 'reply.added':
         case 'reaction.added':
-            await replyAddedHandler(event);
+            await replyAddedHandlerService(event);
             break;
         case 'TEST':
             // do nothing

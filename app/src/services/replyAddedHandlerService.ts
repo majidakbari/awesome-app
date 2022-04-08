@@ -3,7 +3,7 @@ import graphqlClient from "../integrations/graphqlClient";
 import createOrFindTagService from "./createOrFindTagService";
 import attachTagToUserService from "./attachTagToUserService";
 
-const replyAddedHandler = async (event: Event): Promise<void> => {
+const replyAddedHandlerService = async (event: Event): Promise<void> => {
     const postId = event.eventBody.object?.postId;
     const userId = event.eventBody.actor?.id
     if (!postId || !userId) {
@@ -21,4 +21,4 @@ const replyAddedHandler = async (event: Event): Promise<void> => {
     }
 };
 
-export default replyAddedHandler;
+export default replyAddedHandlerService;

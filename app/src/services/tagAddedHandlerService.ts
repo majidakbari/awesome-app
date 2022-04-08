@@ -2,7 +2,7 @@ import Event from "../interfaces/event";
 import attachTagToUserService from "./attachTagToUserService";
 import createOrFindTagService from "./createOrFindTagService";
 
-const tagAddedHandler = async (event: Event): Promise<void> => {
+const tagAddedHandlerService = async (event: Event): Promise<void> => {
     const tagName = event.eventBody.object?.title;
     const userId = event.eventBody.actor?.id;
     if (!tagName || !userId) {
@@ -12,4 +12,4 @@ const tagAddedHandler = async (event: Event): Promise<void> => {
     await attachTagToUserService(userId, tagId);
 };
 
-export default tagAddedHandler;
+export default tagAddedHandlerService;
