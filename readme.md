@@ -4,10 +4,10 @@
 This application is a standalone _task based_ microservice providing REST HTTP endpoints.
 
 ## Challenge to be tackled
-People may show interest in different topics, but even if you ask them, they might not be aware of the things they like
-or the subjects they're interested in; So we're about to build an app to suggest users posts and topics that could be interesting to them.  
+People may show interest in different topics, but even if they were asked, they might not be aware of the things they like
+or the subjects they're interested in; So we're about to build an app to suggest users, the posts and topics that could be interesting to them.  
 Whenever a post is created, this application will capture the corresponding webhook and will remember that the author likes this topic. 
-We store this data in a local database. For now, we distinguish topics based on the tags attached to posts, but in future it would be awesome to perform some analysis on post content to extract keywords and tags out of them. 
+We store this data in a local database. For now, we distinguish topics based on the tags attached to posts, but in future it would be awesome to perform some sort of analysis on post content to extract keywords and tags out of them. 
 The other users who put a reply on the posts or react to these contents will be considered interested and eager to see similar posts as well. So by capturing `reply.added` and `reaction.added` webhooks, we query graphql endpoint and 
 will find the corresponding post tags; Then we append this data to our local db.  
 After a while, when the application learns about people's interest, it will be able to notify users about the new posts that might be interesting to them (sth as [Twitter](https://twitter.com/) recommendation system).  
