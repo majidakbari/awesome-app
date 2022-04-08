@@ -1,19 +1,19 @@
-import dispatchEvent from "../integrations/rabbitmq";
 import {RequestHandler} from "express";
-import dbConnection from "../utils/dbConnection";
+import manageWebhookService from "../services/manageWebhookService";
 
 const webhookController: RequestHandler = async (req, res) => {
-    // await dispatchEvent({
-    //     eventType: req.body.data.type,
-    //     eventBody: JSON.stringify(req.body.data)
-    // });
+    const event = {
+        eventType: req.body.data.name ?? 'TEST',
+        eventBody: req.body.data
+    };
+    await manageWebhookService(event);
 
-    await dbConnection();
+    console.log(req.body)
 
     return res.send({
-        type: req.body.type,
+        type: event.eventType,
         status: "SUCCEEDED",
-        data: req.body.data
+        data: event.eventBody
     })
 };
 

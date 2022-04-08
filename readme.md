@@ -68,6 +68,12 @@ node:17.8.0
 `broker`
 bitnami/rabbitmq
 
+## Further suggestions
+* Manage database connections pool in a better way.
+* Using text analysis to extract tags out of posts contents.
+* Add more tests and increase the code coverage.
+* Using code quality tools like [Sonar](https://www.sonarqube.org/) to avoid having code smells and other development issues.
+
 ## Author
 Majid Akbari [Linkedin](https://linkedin.com/in/majid-akbari)
 

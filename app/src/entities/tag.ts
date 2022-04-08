@@ -9,5 +9,5 @@ export class Tag {
     @Column({
         length: 100,
     })
-    tag: string
+    name: string
 }
