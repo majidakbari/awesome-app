@@ -1,7 +1,7 @@
 import Event from "../interfaces/event";
-import graphqlClient from "../integrations/graphqlClient";
 import createOrFindTagService from "./createOrFindTagService";
 import attachTagToUserService from "./attachTagToUserService";
+import getPostTagsByIdService from "./getPostTagsByIdService";
 
 const replyAddedHandlerService = async (event: Event): Promise<void> => {
     const postId = event.eventBody.object?.postId;
@@ -9,9 +9,7 @@ const replyAddedHandlerService = async (event: Event): Promise<void> => {
     if (!postId || !userId) {
         return;
     }
-    const client = await graphqlClient();
-    const post = await client.posts.get(postId, {tags: 'all'})
-    const postTags = post.tags;
+    const postTags = await getPostTagsByIdService(postId);
     if (!postTags) {
         return;
     }

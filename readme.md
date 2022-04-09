@@ -77,6 +77,7 @@ postgres:alpine3.15
 * Using text analysis to extract tags out of posts contents.
 * Add more tests and increase the code coverage.
 * Using code quality tools like [Sonar](https://www.sonarqube.org/) to avoid having code smells and other development issues.
+* Add a tool to manage structured logs for debugging purposes.
 
 ## Author
 Majid Akbari [Linkedin](https://linkedin.com/in/majid-akbari)

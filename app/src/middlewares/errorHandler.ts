@@ -23,6 +23,7 @@ const errorHandler: ErrorRequestHandler = (err: Error, req: Request, res: Respon
             message: err.getMessage()
         };
     } else {
+        console.log(err)
         statusCode = 500;
         error = {
             error: "Server Error",
