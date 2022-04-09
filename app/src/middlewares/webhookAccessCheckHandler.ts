@@ -1,5 +1,5 @@
 import {RequestHandler} from "express";
-import accessDeniedError from "../errors/clinetErrors/accessDeniedError";
+import AccessDeniedError from "../errors/clinetErrors/accessDeniedError";
 import * as crypto from "crypto";
 
 const webhookAccessCheckHandler: RequestHandler = (req, res, next) => {
@@ -11,7 +11,7 @@ const webhookAccessCheckHandler: RequestHandler = (req, res, next) => {
         body: JSON.stringify(req.body),
         timestamp: parseInt(timestamp as string)
     })) {
-        throw new accessDeniedError();
+        throw new AccessDeniedError();
     }
     next();
 };

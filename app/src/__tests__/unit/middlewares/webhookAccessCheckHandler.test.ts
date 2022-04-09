@@ -1,7 +1,7 @@
 import * as timekeeper from "timekeeper";
 import webhookAccessCheckHandler from "../../../middlewares/webhookAccessCheckHandler";
 import {NextFunction, Request, Response} from "express";
-import accessDeniedError from "../../../errors/clinetErrors/accessDeniedError";
+import AccessDeniedError from "../../../errors/clinetErrors/accessDeniedError";
 
 const oldEnv = process.env;
 const signingSecret = '9e2bb174144943d98df25f7fbd89753d';
@@ -35,7 +35,7 @@ describe('webhookAccessCheck middleware should accept or reject requests based o
             expect(true).toBe(false);
         } catch (e) {
             expect(nextFunction).not.toHaveBeenCalled();
-            expect(e).toBeInstanceOf(accessDeniedError);
+            expect(e).toBeInstanceOf(AccessDeniedError);
         }
     });
 
@@ -51,7 +51,7 @@ describe('webhookAccessCheck middleware should accept or reject requests based o
             expect(true).toBe(false);
         } catch (e) {
             expect(nextFunction).not.toHaveBeenCalled();
-            expect(e).toBeInstanceOf(accessDeniedError);
+            expect(e).toBeInstanceOf(AccessDeniedError);
         }
     });
 

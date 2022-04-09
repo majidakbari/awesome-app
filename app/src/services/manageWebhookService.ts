@@ -1,5 +1,5 @@
 import Event from "../interfaces/event";
-import notSupportedEventError from "../errors/clinetErrors/notSupportedEventError";
+import NotSupportedEventError from "../errors/clinetErrors/notSupportedEventError";
 import tagAddedHandlerService from "./tagAddedHandlerService";
 import replyAddedHandlerService from "./replyAddedHandlerService";
 import postPublishedHandlerService from "./postPublishedHandlerService";
@@ -20,7 +20,7 @@ const manageWebhookService = async (event: Event): Promise<void> => {
             // do nothing
             break;
         default:
-            throw new notSupportedEventError();
+            throw new NotSupportedEventError();
     }
 };
 

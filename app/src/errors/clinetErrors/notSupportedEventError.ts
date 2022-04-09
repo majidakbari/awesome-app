@@ -1,9 +1,9 @@
 import AbstractClientError from "./abstractClientError";
 
-class notSupportedEventError extends AbstractClientError {
+class NotSupportedEventError extends AbstractClientError {
     constructor() {
         super(400, "This event is not supported by the app.");
     }
 }
 
-export default notSupportedEventError;
+export default NotSupportedEventError;

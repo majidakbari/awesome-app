@@ -1,5 +1,5 @@
 import amqp, {Channel, Connection} from "amqplib";
-import BrokerConnectionError from "../errors/serverErrors/BrokerConnectionError";
+import BrokerConnectionError from "../errors/serverErrors/brokerConnectionError";
 import NotificationEvent from "../interfaces/notificationEvent";
 
 const connect = async (): Promise<Connection> => {

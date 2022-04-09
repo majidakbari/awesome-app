@@ -1,9 +1,9 @@
 import AbstractClientError from "./abstractClientError";
 
-class accessDeniedError extends AbstractClientError {
+class AccessDeniedError extends AbstractClientError {
     constructor() {
         super(403, "Forbidden.");
     }
 }
 
-export default accessDeniedError;
+export default AccessDeniedError;
