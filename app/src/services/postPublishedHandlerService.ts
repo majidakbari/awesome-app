@@ -4,9 +4,11 @@ import {Tag} from "@tribeplatform/gql-client/types/tribe-graphql.generated";
 import {Tag as TagEntity} from "../entities/tag";
 import findTagsByTitlesService from "./findTagsByTitlesService";
 import findUsersAttachedToTagIdsService from "./findUsersAttachedToTagIdsService";
+import dispatchEvent from "../integrations/rabbitmq";
+import {UserTag} from "../entities/userTag";
 
 const postPublishedHandlerService = async (event: Event): Promise<void> => {
-    const postId = event.eventBody.object?.postId;
+    const postId = event.eventBody.object?.id;
     const userId = event.eventBody.actor?.id
     if (!postId || !userId) {
         return;
@@ -22,7 +24,13 @@ const postPublishedHandlerService = async (event: Event): Promise<void> => {
         return;
     }
     const usersAttached = await findUsersAttachedToTagIdsService(tagIds, userId);
-    // dispatch events to these users (usersAttached)
+    if (!usersAttached) {
+        return;
+    }
+    await dispatchEvent({
+        postId: postId,
+        userIds: usersAttached.map((userTag: UserTag) => userTag.userId)
+    }, 'notification');
 }
 
 export default postPublishedHandlerService;

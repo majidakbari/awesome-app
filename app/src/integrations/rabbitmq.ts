@@ -1,6 +1,6 @@
 import amqp, {Channel, Connection} from "amqplib";
-import Event from "../interfaces/event";
 import BrokerConnectionError from "../errors/serverErrors/BrokerConnectionError";
+import NotificationEvent from "../interfaces/notificationEvent";
 
 const connect = async (): Promise<Connection> => {
     try {
@@ -31,10 +31,10 @@ const close = async (connection: Connection) => {
 };
 
 
-const dispatchEvent = async (event: Event, queue = 'default') => {
+const dispatchEvent = async (event: NotificationEvent, queue = 'default') => {
     const connection = await connect();
     const channel = await createChannel(connection, queue);
-    send(channel, queue, JSON.stringify(event.eventBody));
+    send(channel, queue, JSON.stringify(event));
     await close(connection);
 };
 
