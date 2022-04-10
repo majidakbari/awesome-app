@@ -6,12 +6,12 @@ import AccessDeniedError from "../../../errors/clinetErrors/accessDeniedError";
 const oldEnv = process.env;
 const signingSecret = '9e2bb174144943d98df25f7fbd89753d';
 
-beforeAll(() => {
+beforeAll((): void => {
     process.env.SIGNING_SECRET = signingSecret;
     timekeeper.freeze(new Date(1649315898057));
 })
 
-afterAll(() => {
+afterAll((): void => {
     process.env = oldEnv;
     timekeeper.reset();
 });
