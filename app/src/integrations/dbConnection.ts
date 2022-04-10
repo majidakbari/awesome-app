@@ -1,5 +1,7 @@
 import db from "../config/db";
-import {DataSource} from "typeorm";
+import {DataSource, Repository} from "typeorm";
+import {Tag} from "../entities/tag";
+import {UserTag} from "../entities/userTag";
 
 let connection: DataSource;
 
@@ -15,4 +17,12 @@ const dbConnection = async (): Promise<DataSource> => {
     return await connectToDb();
 };
 
-export default dbConnection;
+const tagRepository = async (): Promise<Repository<Tag>> => {
+    return (await dbConnection()).getRepository(Tag);
+};
+
+const userTagRepository = async (): Promise<Repository<UserTag>> => {
+    return (await dbConnection()).getRepository(UserTag);
+};
+
+export {dbConnection, tagRepository, userTagRepository};

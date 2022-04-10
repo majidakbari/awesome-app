@@ -1,47 +1,41 @@
-import dbConnection from "../../../integrations/dbConnection";
 import {Tag} from "../../../entities/tag";
 import createOrFindTagService from "../../../services/createOrFindTagService";
 import assert = require("assert");
+import {tagRepository} from "../../../integrations/dbConnection";
 
 
 describe('create or find tag service should work as expected.', () => {
 
     beforeAll(async (): Promise<void> => {
-        const connection = await dbConnection();
-        const tagRepository = await connection.getRepository(Tag);
-        tagRepository.clear();
+        await (await tagRepository()).clear();
     });
 
     afterEach(async (): Promise<void> => {
-        const connection = await dbConnection();
-        const tagRepository = await connection.getRepository(Tag);
-        tagRepository.clear();
+        await (await tagRepository()).clear();
     });
 
     it('should do nothing when tag already exists.', async () => {
-        const connection = await dbConnection();
-        const tagRepository = await connection.getRepository(Tag);
+        const repository = await tagRepository();
         const tagTitle = 'foo-tag';
         const tag = new Tag();
         tag.name = tagTitle;
-        await tagRepository.save(tag)
+        await repository.save(tag)
 
         const actual = await createOrFindTagService(tagTitle);
 
-        const dbRecord = await tagRepository.findOneBy({name: tagTitle});
+        const dbRecord = await repository.findOneBy({name: tagTitle});
 
-        assert.equal(await tagRepository.count(), 1);
+        assert.equal(await repository.count(), 1);
         assert.equal(actual, dbRecord?.id);
     });
 
     it('should create a new tag record.', async () => {
-        const connection = await dbConnection();
-        const tagRepository = await connection.getRepository(Tag);
+        const repository = await tagRepository();
         const tagTitle = 'foo-bar-tag';
 
         await createOrFindTagService(tagTitle);
 
-        const dbRecord = await tagRepository.findOneBy({name: tagTitle});
+        const dbRecord = await repository.findOneBy({name: tagTitle});
 
         assert.equal(tagTitle, dbRecord?.name);
     });

@@ -1,15 +1,14 @@
-import dbConnection from "../integrations/dbConnection";
 import {Tag} from "../entities/tag";
+import {tagRepository} from "../integrations/dbConnection";
 
 const createOrFindTagService = async (tagName: string) => {
-    const connection = await dbConnection();
     let tagId: number;
-    const tagRepository = connection.getRepository(Tag);
-    const existingTag = await tagRepository.findOneBy({name: tagName});
+    const repository = await tagRepository();
+    const existingTag = await repository.findOneBy({name: tagName});
     if (!existingTag) {
         const tag = new Tag();
         tag.name = tagName;
-        const newTag = await tagRepository.save(tag);
+        const newTag = await repository.save(tag);
         tagId = newTag.id;
     } else {
         tagId = existingTag.id;
