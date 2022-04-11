@@ -1,7 +1,7 @@
 import {closeConnection, userTagRepository} from "../../../integrations/dbConnection";
 import {UserTag} from "../../../entities/userTag";
 import attachTagToUserService from "../../../services/attachTagToUserService";
-import assert = require("assert");
+import * as assert from "assert";
 
 describe('attach tag to user service should act as expected.', () => {
 

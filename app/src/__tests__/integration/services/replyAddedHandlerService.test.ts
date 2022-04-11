@@ -1,7 +1,7 @@
 import {closeConnection, userTagRepository} from "../../../integrations/dbConnection";
 import replyAddedHandlerService from "../../../services/replyAddedHandlerService";
 import Event from "../../../interfaces/event";
-import assert = require("assert");
+import * as assert from "assert";
 
 const getPostTagsByIdService = require("../../../services/getPostTagsByIdService")
 

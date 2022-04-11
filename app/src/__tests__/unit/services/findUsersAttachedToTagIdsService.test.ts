@@ -1,5 +1,5 @@
 import {closeConnection, userTagRepository} from "../../../integrations/dbConnection";
-import assert = require("assert");
+import * as assert from "assert";
 import findUsersAttachedToTagIdsService from "../../../services/findUsersAttachedToTagIdsService";
 import {UserTag} from "../../../entities/userTag";
 

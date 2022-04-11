@@ -1,7 +1,7 @@
 import {closeConnection, tagRepository} from "../../../integrations/dbConnection";
 import {Tag} from "../../../entities/tag";
 import findTagsByTitlesService from "../../../services/findTagsByTitlesService";
-import assert = require("assert");
+import * as assert from "assert";
 
 describe('find tags by title service should work as expected.', () => {
 

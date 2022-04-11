@@ -1,6 +1,6 @@
 import {Tag} from "../../../entities/tag";
 import createOrFindTagService from "../../../services/createOrFindTagService";
-import assert = require("assert");
+import * as assert from "assert";
 import {closeConnection, tagRepository} from "../../../integrations/dbConnection";
 
 describe('create or find tag service should work as expected.', () => {

@@ -1,7 +1,7 @@
 import {closeConnection, tagRepository, userTagRepository} from "../../../integrations/dbConnection";
 import tagAddedHandlerService from "../../../services/tagAddedHandlerService";
 import Event from "../../../interfaces/event";
-import assert = require("assert");
+import * as assert from "assert";
 
 describe('attach tag to user service should act as expected.', () => {
 
