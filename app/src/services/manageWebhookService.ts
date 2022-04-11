@@ -17,8 +17,7 @@ const manageWebhookService = async (event: Event): Promise<void> => {
             await postPublishedHandlerService(event);
             break;
         case 'TEST':
-            // do nothing
-            break;
+            return;
         default:
             throw new NotSupportedEventError();
     }

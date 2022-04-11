@@ -3,7 +3,6 @@ import {Tag} from "../../../entities/tag";
 import findTagsByTitlesService from "../../../services/findTagsByTitlesService";
 import assert = require("assert");
 
-
 describe('find tags by title service should work as expected.', () => {
 
     beforeAll(async (): Promise<void> => {
