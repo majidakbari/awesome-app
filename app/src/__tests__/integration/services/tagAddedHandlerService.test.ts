@@ -35,6 +35,26 @@ describe('attach tag to user service should act as expected.', () => {
         } as Event;
 
         await tagAddedHandlerService(event);
-        assert.equal(true, true);
+
+        const dbTag = await (await tagRepository()).findOneBy({name: tagTitle});
+        const dbUserTag = await (await userTagRepository()).findOneBy({userId: tagCreatorId, tagId: dbTag?.id});
+
+        assert.equal(dbUserTag?.userId, tagCreatorId);
+        assert.equal(dbTag?.name, tagTitle);
+    });
+
+    it('should do nothing when event structure is not correct.', async () => {
+        const event = {
+            eventType: 'tag.added',
+            eventBody: {}
+        } as Event;
+
+        await tagAddedHandlerService(event);
+
+        const tags = await (await tagRepository()).find();
+        const userTags = await (await userTagRepository()).find();
+
+        assert.equal(tags?.length, 0);
+        assert.equal(userTags?.length, 0);
     });
 });
