@@ -14,7 +14,8 @@ const dbConnection = async (): Promise<DataSource> => {
     if (connection != undefined) {
         return connection;
     }
-    return await connectToDb();
+    connection = await connectToDb();
+    return connection;
 };
 
 const tagRepository = async (): Promise<Repository<Tag>> => {
@@ -25,4 +26,10 @@ const userTagRepository = async (): Promise<Repository<UserTag>> => {
     return (await dbConnection()).getRepository(UserTag);
 };
 
-export {dbConnection, tagRepository, userTagRepository};
+const closeConnection = async (): Promise<void> => {
+    if (connection) {
+        await connection.destroy();
+    }
+};
+
+export {dbConnection, tagRepository, userTagRepository, closeConnection};

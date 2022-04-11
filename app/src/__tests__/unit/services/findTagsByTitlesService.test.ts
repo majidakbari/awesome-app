@@ -1,4 +1,4 @@
-import {tagRepository} from "../../../integrations/dbConnection";
+import {closeConnection, tagRepository} from "../../../integrations/dbConnection";
 import {Tag} from "../../../entities/tag";
 import findTagsByTitlesService from "../../../services/findTagsByTitlesService";
 import assert = require("assert");
@@ -11,6 +11,10 @@ describe('find tags by title service should work as expected.', () => {
 
     afterEach(async (): Promise<void> => {
         await (await tagRepository()).clear();
+    });
+
+    afterAll(async (): Promise<void> => {
+        await closeConnection();
     });
 
     it('should return an empty array when titles do not exist in db.', async () => {

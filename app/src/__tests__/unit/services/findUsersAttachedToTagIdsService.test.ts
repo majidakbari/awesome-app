@@ -1,4 +1,4 @@
-import {userTagRepository} from "../../../integrations/dbConnection";
+import {closeConnection, userTagRepository} from "../../../integrations/dbConnection";
 import assert = require("assert");
 import findUsersAttachedToTagIdsService from "../../../services/findUsersAttachedToTagIdsService";
 import {UserTag} from "../../../entities/userTag";
@@ -11,6 +11,10 @@ describe('find users attached to many tags service should work as expected.', ()
 
     afterEach(async (): Promise<void> => {
         await (await userTagRepository()).clear();
+    });
+
+    afterAll(async (): Promise<void> => {
+        await closeConnection();
     });
 
     it('should return an empty list when tags are not attached to any user.', async () => {

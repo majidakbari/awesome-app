@@ -1,4 +1,4 @@
-import {userTagRepository} from "../../../integrations/dbConnection";
+import {closeConnection, userTagRepository} from "../../../integrations/dbConnection";
 import {UserTag} from "../../../entities/userTag";
 import attachTagToUserService from "../../../services/attachTagToUserService";
 import assert = require("assert");
@@ -11,6 +11,10 @@ describe('attach tag to user service should act as expected.', () => {
 
     afterEach(async (): Promise<void> => {
         await (await userTagRepository()).clear();
+    });
+
+    afterAll(async (): Promise<void> => {
+        await closeConnection();
     });
 
     it('should do nothing when userTag record already exists.', async () => {

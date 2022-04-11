@@ -1,7 +1,7 @@
 import {Tag} from "../../../entities/tag";
 import createOrFindTagService from "../../../services/createOrFindTagService";
 import assert = require("assert");
-import {tagRepository} from "../../../integrations/dbConnection";
+import {closeConnection, tagRepository} from "../../../integrations/dbConnection";
 
 describe('create or find tag service should work as expected.', () => {
 
@@ -11,6 +11,10 @@ describe('create or find tag service should work as expected.', () => {
 
     afterEach(async (): Promise<void> => {
         await (await tagRepository()).clear();
+    });
+
+    afterAll(async (): Promise<void> => {
+        await closeConnection();
     });
 
     it('should do nothing when tag already exists.', async () => {
