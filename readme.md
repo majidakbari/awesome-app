@@ -36,7 +36,7 @@ Follow these steps to simply run the project.
 Clone this repository into your local machine using the following command:
 
 ```bash
-git clone git@github.com:majidakbari/awesome-app.git
+git clone git@github.com:majidakbari/recommendation.git
 ```
 
 ### Environment variables
