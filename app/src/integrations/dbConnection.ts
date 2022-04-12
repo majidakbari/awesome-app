@@ -10,7 +10,8 @@ const connectToDb = async (): Promise<DataSource> => {
     return connection;
 };
 
-const dbConnection = async (): Promise<DataSource> => {
+//This method creates a connection pool not a connection, so we never need to close it as long as the app is running.
+const connectionPool = async (): Promise<DataSource> => {
     if (connection != undefined) {
         return connection;
     }
@@ -19,11 +20,11 @@ const dbConnection = async (): Promise<DataSource> => {
 };
 
 const tagRepository = async (): Promise<Repository<Tag>> => {
-    return (await dbConnection()).getRepository(Tag);
+    return (await connectionPool()).getRepository(Tag);
 };
 
 const userTagRepository = async (): Promise<Repository<UserTag>> => {
-    return (await dbConnection()).getRepository(UserTag);
+    return (await connectionPool()).getRepository(UserTag);
 };
 
 const closeConnection = async (): Promise<void> => {
@@ -32,4 +33,4 @@ const closeConnection = async (): Promise<void> => {
     }
 };
 
-export {dbConnection, tagRepository, userTagRepository, closeConnection};
+export {tagRepository, userTagRepository, closeConnection};

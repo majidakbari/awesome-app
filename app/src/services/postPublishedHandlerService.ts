@@ -14,23 +14,23 @@ const postPublishedHandlerService = async (event: Event): Promise<void> => {
         return;
     }
     const postTags = await getPostTagsByIdService(postId);
-    if (!postTags) {
+    if (!postTags || postTags.length === 0) {
         return;
     }
     const tagTitles = postTags.map((tag: Tag) => tag.title);
     const tags = await findTagsByTitlesService(tagTitles);
     const tagIds = tags.map((entity: TagEntity) => entity.id);
-    if (!tagIds) {
+    if (!tagIds || tagIds.length === 0) {
         return;
     }
     const usersAttached = await findUsersAttachedToTagIdsService(tagIds, userId);
-    if (!usersAttached) {
+    if (!usersAttached || usersAttached.length === 0) {
         return;
     }
     await dispatchEvent({
         postId: postId,
         userIds: usersAttached.map((userTag: UserTag) => userTag.userId)
-    }, 'notification');
+    }, "notification");
 }
 
 export default postPublishedHandlerService;

@@ -19,14 +19,16 @@
     "tribe",
     "recommendation",
     "express",
-    "node"
+    "node",
+    "event-driven-architecture",
+    "rabbitmq"
   ],
   "author": "Majid Akbari",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/majidakbari/awesome-app/issues"
+    "url": "https://github.com/majidakbari/recommendation/issues"
   },
-  "homepage": "https://github.com/majidakbari/awesome-app#readme",
+  "homepage": "https://github.com/majidakbari/recommendation#readme",
   "dependencies": {
     "@tribeplatform/gql-client": "^1.2.0",
     "amqplib": "^0.8.0",

@@ -1,19 +1,16 @@
 import {Tag} from "../entities/tag";
 import {tagRepository} from "../integrations/dbConnection";
 
-const createOrFindTagService = async (tagName: string) => {
-    let tagId: number;
+const createOrFindTagService = async (tagName: string): Promise<number> => {
     const repository = await tagRepository();
     const existingTag = await repository.findOneBy({name: tagName});
-    if (!existingTag) {
-        const tag = new Tag();
-        tag.name = tagName;
-        const newTag = await repository.save(tag);
-        tagId = newTag.id;
-    } else {
-        tagId = existingTag.id;
+    if (existingTag) {
+        return existingTag.id;
     }
-    return tagId;
+    const tag = new Tag();
+    tag.name = tagName;
+    await repository.save(tag);
+    return tag.id;
 }
 
 export default createOrFindTagService;

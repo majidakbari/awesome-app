@@ -10,7 +10,7 @@ const replyAddedHandlerService = async (event: Event): Promise<void> => {
         return;
     }
     const postTags = await getPostTagsByIdService(postId);
-    if (!postTags) {
+    if (!postTags || postTags.length === 0) {
         return;
     }
     for (const tag of postTags) {

@@ -3,7 +3,7 @@ import manageWebhookService from "../services/manageWebhookService";
 
 const webhookController: RequestHandler = async (req, res) => {
     const event = {
-        eventType: req.body.data.name ?? 'TEST',
+        eventType: req.body.data.name ?? "TEST",
         eventBody: req.body.data
     };
     await manageWebhookService(event);

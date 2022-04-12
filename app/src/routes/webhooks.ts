@@ -8,7 +8,7 @@ import webhookAccessCheckHandler from "../middlewares/webhookAccessCheckHandler"
 
 const router = Router();
 
-router.route('/webhook')
+router.route("/webhook")
     .post(webhookAccessCheckHandler, webhookValidationRules, validationErrorHandler, asyncHandler(webhookController))
     .all(methodNotAllowedHandler);
 

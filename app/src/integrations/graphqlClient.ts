@@ -1,4 +1,4 @@
-import {TribeClient} from '@tribeplatform/gql-client'
+import {TribeClient} from "@tribeplatform/gql-client"
 
 const graphqlClient = async (): Promise<TribeClient> => {
     const client = new TribeClient({
@@ -7,7 +7,7 @@ const graphqlClient = async (): Promise<TribeClient> => {
         clientSecret: process.env.CLIENT_SECRET
     });
     const accessToken = await client.generateToken({
-        networkId: process.env.NETWORK_ID || ''
+        networkId: process.env.NETWORK_ID || ""
     });
     client.setToken(accessToken)
     return client;
