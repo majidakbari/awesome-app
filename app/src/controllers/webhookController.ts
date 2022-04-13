@@ -6,6 +6,7 @@ const webhookController: RequestHandler = async (req, res) => {
         eventType: req.body.data.name ?? "TEST",
         eventBody: req.body.data
     };
+
     await manageWebhookService(event);
     return res.send({
         type: event.eventType,

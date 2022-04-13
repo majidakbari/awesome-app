@@ -1,11 +1,11 @@
 import Event from "../interfaces/event";
 import getPostTagsByIdService from "./getPostTagsByIdService";
 import {Tag} from "@tribeplatform/gql-client/types/tribe-graphql.generated";
-import {Tag as TagEntity} from "../entities/tag";
-import findTagsByTitlesService from "./findTagsByTitlesService";
 import findUsersAttachedToTagIdsService from "./findUsersAttachedToTagIdsService";
 import dispatchEvent from "../integrations/rabbitmq";
 import {UserTag} from "../entities/userTag";
+import createOrFindTagService from "./createOrFindTagService";
+import attachTagToUserService from "./attachTagToUserService";
 
 const postPublishedHandlerService = async (event: Event): Promise<void> => {
     const postId = event.eventBody.object?.id;
@@ -17,20 +17,32 @@ const postPublishedHandlerService = async (event: Event): Promise<void> => {
     if (!postTags || postTags.length === 0) {
         return;
     }
-    const tagTitles = postTags.map((tag: Tag) => tag.title);
-    const tags = await findTagsByTitlesService(tagTitles);
-    const tagIds = tags.map((entity: TagEntity) => entity.id);
+
+    const tagIds = await attachPostTagsToItsCreator(postTags, userId);
     if (!tagIds || tagIds.length === 0) {
         return;
     }
+
     const usersAttached = await findUsersAttachedToTagIdsService(tagIds, userId);
     if (!usersAttached || usersAttached.length === 0) {
         return;
     }
+
     await dispatchEvent({
         postId: postId,
         userIds: usersAttached.map((userTag: UserTag) => userTag.userId)
     }, "notification");
+}
+
+const attachPostTagsToItsCreator = async (postTags: Array<Tag>, userId: string): Promise<number[]> => {
+    const tagTitles = postTags.map((tag: Tag) => tag.title);
+    const tagIds = [];
+    for (const tagTitle of tagTitles) {
+        const tagId = await createOrFindTagService(tagTitle)
+        await attachTagToUserService(userId, tagId);
+        tagIds.push(tagId);
+    }
+    return tagIds;
 }
 
 export default postPublishedHandlerService;
